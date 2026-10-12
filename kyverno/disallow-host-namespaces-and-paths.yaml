@@ -1,0 +1,25 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-host-namespaces-and-paths
+  annotations:
+    policies.kyverno.io/title: Disallow hostNetwork/hostPID/hostIPC and hostPath
+    policies.kyverno.io/category: Pod Security
+    policies.kyverno.io/severity: high
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: disallow-host-namespaces-and-paths
+      match:
+        any:
+          - resources: {kinds: [Pod]}
+      validate:
+        message: "Host namespaces and hostPath volumes are not allowed (PSS baseline)."
+        pattern:
+          spec:
+            =(hostNetwork): "false"
+            =(hostPID): "false"
+            =(hostIPC): "false"
+            =(volumes):
+              - X(hostPath): "null"

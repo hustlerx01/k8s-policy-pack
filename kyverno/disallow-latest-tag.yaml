@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-latest-tag
+  annotations:
+    policies.kyverno.io/title: Disallow :latest / untagged images
+    policies.kyverno.io/category: Pod Security
+    policies.kyverno.io/severity: high
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: disallow-latest-tag
+      match:
+        any:
+          - resources: {kinds: [Pod]}
+      validate:
+        message: "Pin images to a version tag or digest; :latest and untagged are not allowed."
+        pattern:
+          spec:
+            containers:
+              - image: "*:* & !*:latest"

@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-drop-all-capabilities
+  annotations:
+    policies.kyverno.io/title: Drop ALL capabilities, no privilege escalation
+    policies.kyverno.io/category: Pod Security
+    policies.kyverno.io/severity: high
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: require-drop-all-capabilities
+      match:
+        any:
+          - resources: {kinds: [Pod]}
+      validate:
+        message: "Containers must set allowPrivilegeEscalation=false and drop ALL capabilities (PSS restricted)."
+        pattern:
+          spec:
+            containers:
+              - securityContext:
+                  allowPrivilegeEscalation: "false"
+                  capabilities:
+                    drop:
+                      - ALL
