@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: legacy-api, namespace: app}
+spec:
+  selector: {matchLabels: {app: legacy}}
+  template:
+    metadata: {labels: {app: legacy}}
+    spec:
+      containers:
+        - name: api
+          image: registry.local:5000/legacy-api
+          securityContext: {privileged: true}

@@ -1,0 +1,304 @@
+# Expectation matrix: every bad pod fails exactly its policy and passes all others.
+apiVersion: cli.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: policy-pack
+policies:
+- ../kyverno/disallow-privileged.yaml
+- ../kyverno/require-run-as-non-root.yaml
+- ../kyverno/disallow-latest-tag.yaml
+- ../kyverno/require-limits.yaml
+- ../kyverno/disallow-host-namespaces-and-paths.yaml
+- ../kyverno/require-drop-all-capabilities.yaml
+resources:
+- resources/good.yaml
+- resources/bad.yaml
+results:
+- policy: disallow-privileged
+  rule: disallow-privileged
+  resources:
+  - app/good
+  kind: Pod
+  result: pass
+- policy: disallow-privileged
+  rule: disallow-privileged
+  resources:
+  - app/bad-privileged
+  kind: Pod
+  result: fail
+- policy: disallow-privileged
+  rule: disallow-privileged
+  resources:
+  - app/bad-root
+  kind: Pod
+  result: pass
+- policy: disallow-privileged
+  rule: disallow-privileged
+  resources:
+  - app/bad-latest
+  kind: Pod
+  result: pass
+- policy: disallow-privileged
+  rule: disallow-privileged
+  resources:
+  - app/bad-untagged
+  kind: Pod
+  result: pass
+- policy: disallow-privileged
+  rule: disallow-privileged
+  resources:
+  - app/bad-nolimits
+  kind: Pod
+  result: pass
+- policy: disallow-privileged
+  rule: disallow-privileged
+  resources:
+  - app/bad-hostpath
+  kind: Pod
+  result: pass
+- policy: disallow-privileged
+  rule: disallow-privileged
+  resources:
+  - app/bad-caps
+  kind: Pod
+  result: pass
+- policy: require-run-as-non-root
+  rule: require-run-as-non-root
+  resources:
+  - app/good
+  kind: Pod
+  result: pass
+- policy: require-run-as-non-root
+  rule: require-run-as-non-root
+  resources:
+  - app/bad-privileged
+  kind: Pod
+  result: pass
+- policy: require-run-as-non-root
+  rule: require-run-as-non-root
+  resources:
+  - app/bad-root
+  kind: Pod
+  result: fail
+- policy: require-run-as-non-root
+  rule: require-run-as-non-root
+  resources:
+  - app/bad-latest
+  kind: Pod
+  result: pass
+- policy: require-run-as-non-root
+  rule: require-run-as-non-root
+  resources:
+  - app/bad-untagged
+  kind: Pod
+  result: pass
+- policy: require-run-as-non-root
+  rule: require-run-as-non-root
+  resources:
+  - app/bad-nolimits
+  kind: Pod
+  result: pass
+- policy: require-run-as-non-root
+  rule: require-run-as-non-root
+  resources:
+  - app/bad-hostpath
+  kind: Pod
+  result: pass
+- policy: require-run-as-non-root
+  rule: require-run-as-non-root
+  resources:
+  - app/bad-caps
+  kind: Pod
+  result: pass
+- policy: disallow-latest-tag
+  rule: disallow-latest-tag
+  resources:
+  - app/good
+  kind: Pod
+  result: pass
+- policy: disallow-latest-tag
+  rule: disallow-latest-tag
+  resources:
+  - app/bad-privileged
+  kind: Pod
+  result: pass
+- policy: disallow-latest-tag
+  rule: disallow-latest-tag
+  resources:
+  - app/bad-root
+  kind: Pod
+  result: pass
+- policy: disallow-latest-tag
+  rule: disallow-latest-tag
+  resources:
+  - app/bad-latest
+  kind: Pod
+  result: fail
+- policy: disallow-latest-tag
+  rule: disallow-latest-tag
+  resources:
+  - app/bad-untagged
+  kind: Pod
+  result: fail
+- policy: disallow-latest-tag
+  rule: disallow-latest-tag
+  resources:
+  - app/bad-nolimits
+  kind: Pod
+  result: pass
+- policy: disallow-latest-tag
+  rule: disallow-latest-tag
+  resources:
+  - app/bad-hostpath
+  kind: Pod
+  result: pass
+- policy: disallow-latest-tag
+  rule: disallow-latest-tag
+  resources:
+  - app/bad-caps
+  kind: Pod
+  result: pass
+- policy: require-limits
+  rule: require-limits
+  resources:
+  - app/good
+  kind: Pod
+  result: pass
+- policy: require-limits
+  rule: require-limits
+  resources:
+  - app/bad-privileged
+  kind: Pod
+  result: pass
+- policy: require-limits
+  rule: require-limits
+  resources:
+  - app/bad-root
+  kind: Pod
+  result: pass
+- policy: require-limits
+  rule: require-limits
+  resources:
+  - app/bad-latest
+  kind: Pod
+  result: pass
+- policy: require-limits
+  rule: require-limits
+  resources:
+  - app/bad-untagged
+  kind: Pod
+  result: pass
+- policy: require-limits
+  rule: require-limits
+  resources:
+  - app/bad-nolimits
+  kind: Pod
+  result: fail
+- policy: require-limits
+  rule: require-limits
+  resources:
+  - app/bad-hostpath
+  kind: Pod
+  result: pass
+- policy: require-limits
+  rule: require-limits
+  resources:
+  - app/bad-caps
+  kind: Pod
+  result: pass
+- policy: disallow-host-namespaces-and-paths
+  rule: disallow-host-namespaces-and-paths
+  resources:
+  - app/good
+  kind: Pod
+  result: pass
+- policy: disallow-host-namespaces-and-paths
+  rule: disallow-host-namespaces-and-paths
+  resources:
+  - app/bad-privileged
+  kind: Pod
+  result: pass
+- policy: disallow-host-namespaces-and-paths
+  rule: disallow-host-namespaces-and-paths
+  resources:
+  - app/bad-root
+  kind: Pod
+  result: pass
+- policy: disallow-host-namespaces-and-paths
+  rule: disallow-host-namespaces-and-paths
+  resources:
+  - app/bad-latest
+  kind: Pod
+  result: pass
+- policy: disallow-host-namespaces-and-paths
+  rule: disallow-host-namespaces-and-paths
+  resources:
+  - app/bad-untagged
+  kind: Pod
+  result: pass
+- policy: disallow-host-namespaces-and-paths
+  rule: disallow-host-namespaces-and-paths
+  resources:
+  - app/bad-nolimits
+  kind: Pod
+  result: pass
+- policy: disallow-host-namespaces-and-paths
+  rule: disallow-host-namespaces-and-paths
+  resources:
+  - app/bad-hostpath
+  kind: Pod
+  result: fail
+- policy: disallow-host-namespaces-and-paths
+  rule: disallow-host-namespaces-and-paths
+  resources:
+  - app/bad-caps
+  kind: Pod
+  result: pass
+- policy: require-drop-all-capabilities
+  rule: require-drop-all-capabilities
+  resources:
+  - app/good
+  kind: Pod
+  result: pass
+- policy: require-drop-all-capabilities
+  rule: require-drop-all-capabilities
+  resources:
+  - app/bad-privileged
+  kind: Pod
+  result: pass
+- policy: require-drop-all-capabilities
+  rule: require-drop-all-capabilities
+  resources:
+  - app/bad-root
+  kind: Pod
+  result: pass
+- policy: require-drop-all-capabilities
+  rule: require-drop-all-capabilities
+  resources:
+  - app/bad-latest
+  kind: Pod
+  result: pass
+- policy: require-drop-all-capabilities
+  rule: require-drop-all-capabilities
+  resources:
+  - app/bad-untagged
+  kind: Pod
+  result: pass
+- policy: require-drop-all-capabilities
+  rule: require-drop-all-capabilities
+  resources:
+  - app/bad-nolimits
+  kind: Pod
+  result: pass
+- policy: require-drop-all-capabilities
+  rule: require-drop-all-capabilities
+  resources:
+  - app/bad-hostpath
+  kind: Pod
+  result: pass
+- policy: require-drop-all-capabilities
+  rule: require-drop-all-capabilities
+  resources:
+  - app/bad-caps
+  kind: Pod
+  result: fail
