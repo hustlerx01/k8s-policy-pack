@@ -1,0 +1,21 @@
+[31mFAIL[0m - tests/resources/bad.yaml - main - Pod/bad-privileged: container "c" is privileged
+[31mFAIL[0m - tests/resources/bad.yaml - main - Pod/bad-root: container "c" may run as root (set runAsNonRoot)
+[31mFAIL[0m - tests/resources/bad.yaml - main - Pod/bad-latest: container "c" image "nginx:latest" is not pinned
+[31mFAIL[0m - tests/resources/bad.yaml - main - Pod/bad-untagged: container "c" image "nginx" is not pinned
+[31mFAIL[0m - tests/resources/bad.yaml - main - Pod/bad-nolimits: container "c" missing resources.limits.memory
+[31mFAIL[0m - tests/resources/bad.yaml - main - Pod/bad-nolimits: container "c" missing resources.requests.cpu
+[31mFAIL[0m - tests/resources/bad.yaml - main - Pod/bad-nolimits: container "c" missing resources.requests.memory
+[31mFAIL[0m - tests/resources/bad.yaml - main - Pod/bad-hostpath: hostNetwork=true is not allowed
+[31mFAIL[0m - tests/resources/bad.yaml - main - Pod/bad-hostpath: hostPath volume "root" is not allowed
+[31mFAIL[0m - tests/resources/bad.yaml - main - Pod/bad-caps: container "c" must drop ALL capabilities
+[31mFAIL[0m - tests/resources/bad.yaml - main - Pod/bad-caps: container "c" must set allowPrivilegeEscalation=false
+[31mFAIL[0m - tests/resources/deployment-mixed.yaml - main - Deployment/legacy-api: container "api" image "registry.local:5000/legacy-api" is not pinned
+[31mFAIL[0m - tests/resources/deployment-mixed.yaml - main - Deployment/legacy-api: container "api" is privileged
+[31mFAIL[0m - tests/resources/deployment-mixed.yaml - main - Deployment/legacy-api: container "api" may run as root (set runAsNonRoot)
+[31mFAIL[0m - tests/resources/deployment-mixed.yaml - main - Deployment/legacy-api: container "api" missing resources.limits.memory
+[31mFAIL[0m - tests/resources/deployment-mixed.yaml - main - Deployment/legacy-api: container "api" missing resources.requests.cpu
+[31mFAIL[0m - tests/resources/deployment-mixed.yaml - main - Deployment/legacy-api: container "api" missing resources.requests.memory
+[31mFAIL[0m - tests/resources/deployment-mixed.yaml - main - Deployment/legacy-api: container "api" must drop ALL capabilities
+[31mFAIL[0m - tests/resources/deployment-mixed.yaml - main - Deployment/legacy-api: container "api" must set allowPrivilegeEscalation=false
+
+[31m72 tests, 53 passed, 0 warnings, 19 failures, 0 exceptions[0m

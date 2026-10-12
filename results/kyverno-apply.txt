@@ -1,0 +1,15 @@
+policy disallow-privileged -> resource app/Pod/bad-privileged failed:
+1 - disallow-privileged validation error: Privileged containers are not allowed (PSS baseline). rule disallow-privileged failed at path /spec/containers/0/securityContext/privileged/
+policy require-run-as-non-root -> resource app/Pod/bad-root failed:
+1 - require-run-as-non-root validation error: Set runAsNonRoot=true at pod or every container level (PSS restricted). rule require-run-as-non-root[0] failed at path /spec/securityContext/ rule require-run-as-non-root[1] failed at path /spec/containers/0/securityContext/runAsNonRoot/
+policy disallow-latest-tag -> resource app/Pod/bad-latest failed:
+1 - disallow-latest-tag validation error: Pin images to a version tag or digest; :latest and untagged are not allowed. rule disallow-latest-tag failed at path /spec/containers/0/image/
+policy disallow-latest-tag -> resource app/Pod/bad-untagged failed:
+1 - disallow-latest-tag validation error: Pin images to a version tag or digest; :latest and untagged are not allowed. rule disallow-latest-tag failed at path /spec/containers/0/image/
+policy require-limits -> resource app/Pod/bad-nolimits failed:
+1 - require-limits validation error: CPU/memory requests and a memory limit are required. rule require-limits failed at path /spec/containers/0/resources/
+policy disallow-host-namespaces-and-paths -> resource app/Pod/bad-hostpath failed:
+1 - disallow-host-namespaces-and-paths validation error: Host namespaces and hostPath volumes are not allowed (PSS baseline). rule disallow-host-namespaces-and-paths failed at path /spec/hostNetwork/
+policy require-drop-all-capabilities -> resource app/Pod/bad-caps failed:
+1 - require-drop-all-capabilities validation error: Containers must set allowPrivilegeEscalation=false and drop ALL capabilities (PSS restricted). rule require-drop-all-capabilities failed at path /spec/containers/0/securityContext/allowPrivilegeEscalation/
+pass: 41, fail: 7, warn: 0, error: 0, skip: 0 

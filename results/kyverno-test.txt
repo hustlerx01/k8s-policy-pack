@@ -1,0 +1,70 @@
+Loading test  ( tests/kyverno-test.yaml ) ...
+  Loading values/variables ...
+  Loading policies ...
+  Warning: kyverno/disallow-privileged.yaml: kyverno.io/v1 ClusterPolicy is deprecated and will be removed in a future release; migrate to ValidatingPolicy, MutatingPolicy, GeneratingPolicy or ImageValidatingPolicy (policies.kyverno.io), see https://kyverno.io/docs/guides/migration-to-cel/
+  Warning: kyverno/require-run-as-non-root.yaml: kyverno.io/v1 ClusterPolicy is deprecated and will be removed in a future release; migrate to ValidatingPolicy, MutatingPolicy, GeneratingPolicy or ImageValidatingPolicy (policies.kyverno.io), see https://kyverno.io/docs/guides/migration-to-cel/
+  Warning: kyverno/disallow-latest-tag.yaml: kyverno.io/v1 ClusterPolicy is deprecated and will be removed in a future release; migrate to ValidatingPolicy, MutatingPolicy, GeneratingPolicy or ImageValidatingPolicy (policies.kyverno.io), see https://kyverno.io/docs/guides/migration-to-cel/
+  Warning: kyverno/require-limits.yaml: kyverno.io/v1 ClusterPolicy is deprecated and will be removed in a future release; migrate to ValidatingPolicy, MutatingPolicy, GeneratingPolicy or ImageValidatingPolicy (policies.kyverno.io), see https://kyverno.io/docs/guides/migration-to-cel/
+  Warning: kyverno/disallow-host-namespaces-and-paths.yaml: kyverno.io/v1 ClusterPolicy is deprecated and will be removed in a future release; migrate to ValidatingPolicy, MutatingPolicy, GeneratingPolicy or ImageValidatingPolicy (policies.kyverno.io), see https://kyverno.io/docs/guides/migration-to-cel/
+  Warning: kyverno/require-drop-all-capabilities.yaml: kyverno.io/v1 ClusterPolicy is deprecated and will be removed in a future release; migrate to ValidatingPolicy, MutatingPolicy, GeneratingPolicy or ImageValidatingPolicy (policies.kyverno.io), see https://kyverno.io/docs/guides/migration-to-cel/
+  Loading resources ...
+  Loading exceptions ...
+  Applying 6 policies to 8 resources with 0 exceptions ...
+  Checking results ...
+
+│──────────│────────────────────────────────────│────────────────────────────────────│───────────────────────────│────────│────────│
+│ [40;32mID (48) [0m │ [40;32mPOLICY                            [0m │ [40;32mRULE                              [0m │ [40;32mRESOURCE                 [0m │ [40;32mRESULT[0m │ [40;32mREASON[0m │
+│──────────│────────────────────────────────────│────────────────────────────────────│───────────────────────────│────────│────────│
+│ 1        │ disallow-privileged                │ disallow-privileged                │ v1/Pod/app/good           │ Pass   │ Ok     │
+│ 2        │ disallow-privileged                │ disallow-privileged                │ v1/Pod/app/bad-privileged │ Pass   │ Ok     │
+│ 3        │ disallow-privileged                │ disallow-privileged                │ v1/Pod/app/bad-root       │ Pass   │ Ok     │
+│ 4        │ disallow-privileged                │ disallow-privileged                │ v1/Pod/app/bad-latest     │ Pass   │ Ok     │
+│ 5        │ disallow-privileged                │ disallow-privileged                │ v1/Pod/app/bad-untagged   │ Pass   │ Ok     │
+│ 6        │ disallow-privileged                │ disallow-privileged                │ v1/Pod/app/bad-nolimits   │ Pass   │ Ok     │
+│ 7        │ disallow-privileged                │ disallow-privileged                │ v1/Pod/app/bad-hostpath   │ Pass   │ Ok     │
+│ 8        │ disallow-privileged                │ disallow-privileged                │ v1/Pod/app/bad-caps       │ Pass   │ Ok     │
+│ 9        │ require-run-as-non-root            │ require-run-as-non-root            │ v1/Pod/app/good           │ Pass   │ Ok     │
+│ 10       │ require-run-as-non-root            │ require-run-as-non-root            │ v1/Pod/app/bad-privileged │ Pass   │ Ok     │
+│ 11       │ require-run-as-non-root            │ require-run-as-non-root            │ v1/Pod/app/bad-root       │ Pass   │ Ok     │
+│ 12       │ require-run-as-non-root            │ require-run-as-non-root            │ v1/Pod/app/bad-latest     │ Pass   │ Ok     │
+│ 13       │ require-run-as-non-root            │ require-run-as-non-root            │ v1/Pod/app/bad-untagged   │ Pass   │ Ok     │
+│ 14       │ require-run-as-non-root            │ require-run-as-non-root            │ v1/Pod/app/bad-nolimits   │ Pass   │ Ok     │
+│ 15       │ require-run-as-non-root            │ require-run-as-non-root            │ v1/Pod/app/bad-hostpath   │ Pass   │ Ok     │
+│ 16       │ require-run-as-non-root            │ require-run-as-non-root            │ v1/Pod/app/bad-caps       │ Pass   │ Ok     │
+│ 17       │ disallow-latest-tag                │ disallow-latest-tag                │ v1/Pod/app/good           │ Pass   │ Ok     │
+│ 18       │ disallow-latest-tag                │ disallow-latest-tag                │ v1/Pod/app/bad-privileged │ Pass   │ Ok     │
+│ 19       │ disallow-latest-tag                │ disallow-latest-tag                │ v1/Pod/app/bad-root       │ Pass   │ Ok     │
+│ 20       │ disallow-latest-tag                │ disallow-latest-tag                │ v1/Pod/app/bad-latest     │ Pass   │ Ok     │
+│ 21       │ disallow-latest-tag                │ disallow-latest-tag                │ v1/Pod/app/bad-untagged   │ Pass   │ Ok     │
+│ 22       │ disallow-latest-tag                │ disallow-latest-tag                │ v1/Pod/app/bad-nolimits   │ Pass   │ Ok     │
+│ 23       │ disallow-latest-tag                │ disallow-latest-tag                │ v1/Pod/app/bad-hostpath   │ Pass   │ Ok     │
+│ 24       │ disallow-latest-tag                │ disallow-latest-tag                │ v1/Pod/app/bad-caps       │ Pass   │ Ok     │
+│ 25       │ require-limits                     │ require-limits                     │ v1/Pod/app/good           │ Pass   │ Ok     │
+│ 26       │ require-limits                     │ require-limits                     │ v1/Pod/app/bad-privileged │ Pass   │ Ok     │
+│ 27       │ require-limits                     │ require-limits                     │ v1/Pod/app/bad-root       │ Pass   │ Ok     │
+│ 28       │ require-limits                     │ require-limits                     │ v1/Pod/app/bad-latest     │ Pass   │ Ok     │
+│ 29       │ require-limits                     │ require-limits                     │ v1/Pod/app/bad-untagged   │ Pass   │ Ok     │
+│ 30       │ require-limits                     │ require-limits                     │ v1/Pod/app/bad-nolimits   │ Pass   │ Ok     │
+│ 31       │ require-limits                     │ require-limits                     │ v1/Pod/app/bad-hostpath   │ Pass   │ Ok     │
+│ 32       │ require-limits                     │ require-limits                     │ v1/Pod/app/bad-caps       │ Pass   │ Ok     │
+│ 33       │ disallow-host-namespaces-and-paths │ disallow-host-namespaces-and-paths │ v1/Pod/app/good           │ Pass   │ Ok     │
+│ 34       │ disallow-host-namespaces-and-paths │ disallow-host-namespaces-and-paths │ v1/Pod/app/bad-privileged │ Pass   │ Ok     │
+│ 35       │ disallow-host-namespaces-and-paths │ disallow-host-namespaces-and-paths │ v1/Pod/app/bad-root       │ Pass   │ Ok     │
+│ 36       │ disallow-host-namespaces-and-paths │ disallow-host-namespaces-and-paths │ v1/Pod/app/bad-latest     │ Pass   │ Ok     │
+│ 37       │ disallow-host-namespaces-and-paths │ disallow-host-namespaces-and-paths │ v1/Pod/app/bad-untagged   │ Pass   │ Ok     │
+│ 38       │ disallow-host-namespaces-and-paths │ disallow-host-namespaces-and-paths │ v1/Pod/app/bad-nolimits   │ Pass   │ Ok     │
+│ 39       │ disallow-host-namespaces-and-paths │ disallow-host-namespaces-and-paths │ v1/Pod/app/bad-hostpath   │ Pass   │ Ok     │
+│ 40       │ disallow-host-namespaces-and-paths │ disallow-host-namespaces-and-paths │ v1/Pod/app/bad-caps       │ Pass   │ Ok     │
+│ 41       │ require-drop-all-capabilities      │ require-drop-all-capabilities      │ v1/Pod/app/good           │ Pass   │ Ok     │
+│ 42       │ require-drop-all-capabilities      │ require-drop-all-capabilities      │ v1/Pod/app/bad-privileged │ Pass   │ Ok     │
+│ 43       │ require-drop-all-capabilities      │ require-drop-all-capabilities      │ v1/Pod/app/bad-root       │ Pass   │ Ok     │
+│ 44       │ require-drop-all-capabilities      │ require-drop-all-capabilities      │ v1/Pod/app/bad-latest     │ Pass   │ Ok     │
+│ 45       │ require-drop-all-capabilities      │ require-drop-all-capabilities      │ v1/Pod/app/bad-untagged   │ Pass   │ Ok     │
+│ 46       │ require-drop-all-capabilities      │ require-drop-all-capabilities      │ v1/Pod/app/bad-nolimits   │ Pass   │ Ok     │
+│ 47       │ require-drop-all-capabilities      │ require-drop-all-capabilities      │ v1/Pod/app/bad-hostpath   │ Pass   │ Ok     │
+│ 48       │ require-drop-all-capabilities      │ require-drop-all-capabilities      │ v1/Pod/app/bad-caps       │ Pass   │ Ok     │
+│──────────│────────────────────────────────────│────────────────────────────────────│───────────────────────────│────────│────────│
+
+
+Test Summary: 48 tests passed and 0 tests failed
+
