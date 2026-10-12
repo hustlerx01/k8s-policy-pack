@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Live admission test on kind. NOT RUN on the authoring box (no Docker). Runs in CI job `kind-e2e`.
+# Live admission test on kind. NOT RUN on the authoring machine (no Docker). Runs in CI job `kind-e2e`.
 set -euo pipefail; cd "$(dirname "$0")/.."
 kind create cluster --name policy-pack --wait 120s
 helm repo add kyverno https://kyverno.github.io/kyverno/ && helm repo update
